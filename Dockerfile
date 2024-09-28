@@ -13,5 +13,18 @@ WORKDIR /app
 COPY --from=builder /app/dist ./dist
 RUN npm install -g http-server
 
-EXPOSE 12445
-CMD ["http-server", "dist", "-p", "12445"]
+# 使用官方Nginx基础镜像
+FROM nginx:latest
+
+# 将网站源码复制到容器的/nginx/www目录
+COPY . /usr/share/nginx/html
+
+# 指定暴露的端口
+EXPOSE 80
+
+# 当容器启动时执行nginx服务器
+CMD ["nginx", "-g", "daemon off;"]
+
+
+# EXPOSE 12445
+# CMD ["http-server", "dist", "-p", "12445"]

@@ -93,7 +93,7 @@ export default ({ mode }) =>
     ],
     server: {
       port: "3000",
-      open: true,
+      open: false,
     },
     resolve: {
       alias: [
